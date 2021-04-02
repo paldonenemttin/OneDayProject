@@ -42,6 +42,7 @@ public class ScoreServiceV1 {
 			System.out.println("=".repeat(50));
 			System.out.println("국어 >>");
 			String strNum = scan.nextLine();
+			
 			try {
 				intKor = Integer.valueOf(strNum);
 			} catch (Exception e) {
@@ -50,7 +51,7 @@ public class ScoreServiceV1 {
 			}
 			if (intKor < 0 && intKor > 100) {
 				System.out.println("입력하는 성적의 범위는 0 ~ 100까지 입니다");
-				return;
+				continue;
 			}
 
 			System.out.println("영어 >>");
@@ -63,7 +64,7 @@ public class ScoreServiceV1 {
 			}
 			if (intEng < 0 && intEng > 100) {
 				System.out.println("입력하는 성적의 범위는 0 ~ 100까지 입니다");
-				return;
+				continue;
 			}
 
 			System.out.println("수학 >>");
@@ -76,7 +77,7 @@ public class ScoreServiceV1 {
 			}
 			if (intMath < 0 && intMath > 100) {
 				System.out.println("입력하는 성적의 범위는 0 ~ 100까지 입니다");
-				return;
+				continue;
 			}
 
 			System.out.println("과학 >>");
@@ -89,7 +90,7 @@ public class ScoreServiceV1 {
 			}
 			if (intMath < 0 && intMath > 100) {
 				System.out.println("입력하는 성적의 범위는 0 ~ 100까지 입니다");
-				return;
+				continue;
 			}
 
 			System.out.println("국사 >>");
@@ -102,8 +103,9 @@ public class ScoreServiceV1 {
 			}
 			if (intHist < 0 && intHist > 100) {
 				System.out.println("입력하는 성적의 범위는 0 ~ 100까지 입니다");
-				return;
+				continue;
 			}
+			
 			
 			System.out.println("=".repeat(50));
 			System.out.println(strName + "학생의 성적이 추가되었습니다");
@@ -135,13 +137,13 @@ public class ScoreServiceV1 {
 		}
 	}
 
-	Integer sumKor;
-	Integer sumEng;
-	Integer sumMath;
-	Integer sumSien;
-	Integer sumHist;
-	Integer totalSum;
-	Float totalAvg;
+	Integer sumKor = 0;
+	Integer sumEng = 0;
+	Integer sumMath= 0;;
+	Integer sumSien = 0;
+	Integer sumHist = 0;
+	Integer totalSum = 0;
+	Float totalAvg = 0.0f;
 
 	public void totalAvg() {
 		Integer nCount = 0;
