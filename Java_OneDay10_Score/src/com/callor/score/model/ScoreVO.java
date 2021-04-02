@@ -2,11 +2,12 @@ package com.callor.score.model;
 
 public class ScoreVO {
 	
-	private Integer Kor;
-	private Integer Eng;
-	private Integer Math;
-	private Integer Sien;
-	private Integer Hist;
+	protected Integer Kor;
+	protected Integer Eng;
+	protected Integer Math;
+	protected Integer Sien;
+	protected Integer Hist;
+	
 	public Integer getKor() {
 		return Kor;
 	}
@@ -37,6 +38,34 @@ public class ScoreVO {
 	public void setHist(Integer hist) {
 		Hist = hist;
 	}
+	
+	
+	protected Integer Toral;
+	protected Float Avg;
+	
+	public Integer getTotal() {
+		return Toral;
+	}
+	public void setTotal(Integer toral) {
+		Toral = toral;
+	}
+	public Float getAvg() {
+		return Avg;
+	}
+	public void setAvg(Float avg) {
+		Avg = avg;
+	}
+
+
+	protected String Name;
+	
+	public String getName() {
+		return Name;
+	}
+	public void setName(String name) {
+		Name = name;
+	}
+	
 	
 	
 
