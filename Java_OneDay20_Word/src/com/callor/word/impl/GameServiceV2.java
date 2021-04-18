@@ -68,6 +68,12 @@ public class GameServiceV2 implements GameService {
 		System.out.print(">> ");
 		fileName = scan.nextLine();
 		String strFileName = "src/com/callor/word/Save.txt" + fileName;
+		try {
+			strFileName = String.valueOf(fileName);
+		} catch (Exception e) {
+			// TODO: handle exception
+			fileName = "Save";
+		}
 		
 		FileWriter fileWriter = null;
 		PrintWriter out = null;
