@@ -3,7 +3,9 @@ package com.callor.word.impl;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -60,77 +62,100 @@ public class GameServiceV2 implements GameService {
 
 	@Override
 	public void saveEnd() {
-		// TODO Auto-generated method stub
+		// TODO txt파일에 저장하늠 메소드
+		String fileName = null;
+		System.out.println("저장할 파일 이름을 입력하세요");
+		System.out.print(">> ");
+		fileName = scan.nextLine();
+		String strFileName = "src/com/callor/word/Save.txt" + fileName;
+		
+		FileWriter fileWriter = null;
+		PrintWriter out = null;
+		try {
+			fileWriter = new FileWriter(strFileName);
+			out = new PrintWriter(fileWriter);
+			int wSize = wordList.size();
+			for(int i = 0; i< wSize; i++) {
+				WordVO vo = wordList.get(i);
+				out.print(vo.getEnglish() + "\t");
+				out.print(vo.getKorea() + "\t");
+				out.print(vo.getCount() + "\t");
+			}
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 
 	}
 
 	@Override
 	public void prontWord() {
 		// TODO 사용자가 게임을 수행하게 하는 메소드
+		Integer wPoint = 0;
 
-		System.out.println("괴도 뤼팡이 황금이 숨겨진 금고의 열쇠를 주려 합니다");
+		System.out.println("해가 서쪽에서 떴나, 괴도 뤼팡이 황금이 숨겨진 금고의 열쇠를 주려 하네요");
 		System.out.println("금을 얻고 싶다면 5개의 영단어를 맞춰주세요, 관심없음:End");
 		System.out.println("(정답을 맞출때마다 포인트가 2점씩 증가)");
 		System.out.println("=".repeat(50));
-		Integer wPoint = 0;
-		for (int i = 0; i < 1600; i++) {
-			while (wPoint < 10) {
-				Random rnd = new Random();
 
-				WordVO word = this.wordSet();
-				String strEng = word.getEnglish();
-				String strKor = word.getKorea();
+		Random rnd = new Random();
 
-				String[] strWords = strEng.split("");
+		WordVO word = this.wordSet();
+		String strEng = word.getEnglish();
 
-				// 단어 배열을 섞는 소스
+		String[] strWords = strEng.split("");
+		while (wPoint < 5) {
+			// 단어 배열을 섞는 소스
+			for (int j = 0; j < 100; j++) {
+				int index = rnd.nextInt(strWords.length);
+				int index1 = rnd.nextInt(strWords.length);
+				String temp = strWords[index];
+				strWords[index] = strWords[index1];
+				strWords[index] = temp;
+			}
+			System.out.println(Arrays.toString(strWords));
+			System.out.println("-".repeat(50));
+			System.out.print(">> ");
+			String strKey = scan.nextLine();
 
-				for (int j = 0; j < 100; j++) {
-					int index = rnd.nextInt(strWords.length);
-					int index1 = rnd.nextInt(strWords.length);
-					String temp = strWords[index];
-					strWords[index] = strWords[index1];
-					strWords[index] = temp;
-				}
-				System.out.println(Arrays.toString(strWords));
-				System.out.println("-".repeat(50));
+			if (strKey.equals("End")) {
+				System.out.println("황금을 가질 기회를 날렸군요");
+				break;
+			}
+			if (strKey.equals(word.getEnglish())) {
+				System.out.println("와 정답!");
+				wPoint += 2;
+			} else {
+				System.out.println("재도전은 re, 힌트는 hint(포인트 1점씩 차감) 끝내기는 End");
 				System.out.print(">> ");
-				String strKey = scan.nextLine();
+				String strKey2 = scan.nextLine();
+				if (strKey2.equals("re")) {
+					continue;
+				}
+				if (strKey2.equals("hint") && wPoint > 0) {
+					System.out.printf("힌트 : %d", word.getKorea());
+					wPoint--;
+					continue;
+				}
+				if (strKey2.equals("hint") && wPoint <= 0) {
+					System.out.println("포인트가 없어 힌트는 없습니다");
+					continue;
+				}
 				if (strKey.equals("End")) {
 					System.out.println("황금을 가질 기회를 날렸군요");
-					return;
-				} else if (strKey.equals(word.getEnglish())) {
-					System.out.println("와 정답!");
-					wPoint += 2;
-				} else {
-					System.out.println("재도전은 re, 힌트는 hint(포인트 1점씩 차감) 끝내기는 End");
-					System.out.print(">> ");
-					String strKey2 = scan.nextLine();
-					if (strKey2.equals("re")) {
-						continue;
-					} else if (strKey2.equals("hint") && wPoint > 0) {
-						System.out.println(word.getKorea());
-						wPoint--;
-						continue;
-					} else if (strKey2.equals("hint") && wPoint <= 0) {
-						System.out.println("포인트가 없어 힌트는 없습니다");
-						continue;
-					} else {
-						System.out.println("황금을 가질 기회를 날렸군요");
-						return;
-					}
+					break;
 				}
-				WordVO wordVO = new WordVO();
-				wordVO.setCount(wPoint);
-				wordVO.setEnglish(strEng);
-				wordVO.setKorea(word.getKorea());
-				wordList.add(wordVO);
 			}
-			
+			WordVO wordVO = new WordVO();
+			wordVO.setCount(wPoint);
+			wordVO.setEnglish(strEng);
+			wordVO.setKorea(word.getKorea());
+			wordList.add(wordVO);
 		}
-		System.out.println("축하합니다 열쇠를 얻었습니다!");
-		
-
+		System.out.println("저런, 뤼팡은 열쇠를 안주고 도망갔습니다!");
+		System.out.println("괴도를 믿은 당신을 탓하세요!");
 	}
 
 	protected WordVO wordSet() {

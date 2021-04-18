@@ -10,6 +10,7 @@ public class GameEx_01 {
 		GameService gmService = new GameServiceV2();
 		
 		gmService.prontWord();
+		gmService.saveEnd();
 	
 	}
 
