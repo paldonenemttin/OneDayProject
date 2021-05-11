@@ -2,18 +2,19 @@ package com.paldonenemttin.food.service;
 
 import java.util.List;
 
-import com.paldonenemttin.food.model.FoodDTO;
-import com.paldonenemttin.food.model.FoodVO;
+import com.paldonenemttin.food.model.EatDTO;
+
+
 
 public interface FListService {
 	
-	public List<FoodDTO> selectAll();
+	public List<EatDTO> selectAll();
 	
-	public FoodDTO findFcode(String fd_code);
+	public List<EatDTO> findDate(String my_date);
 	
-	public List<FoodDTO> findCcode(String fd_ccode);
+	public List<EatDTO> findFname(String fd_name);
 	
-	public List<FoodDTO> findTcode(String fd_tcode);
+	public List<EatDTO> findFcode(String fd_code);
 	
 	public void insert();
 	public void update();

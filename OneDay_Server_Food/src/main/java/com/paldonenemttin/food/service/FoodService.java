@@ -2,6 +2,7 @@ package com.paldonenemttin.food.service;
 
 import java.util.List;
 
+import com.paldonenemttin.food.model.EatVO;
 import com.paldonenemttin.food.model.FoodDTO;
 import com.paldonenemttin.food.model.FoodVO;
 
@@ -17,7 +18,7 @@ public interface FoodService {
 	
 	public List<FoodDTO> findTname(String fd_tname);
 	
-	public void insert(FoodVO foodVO);
+	public int insert(EatVO eatVO);
 	
 	public void update(FoodVO foodVO);
 	

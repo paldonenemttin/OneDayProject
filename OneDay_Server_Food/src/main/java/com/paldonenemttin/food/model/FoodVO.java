@@ -17,8 +17,8 @@ public class FoodVO {
 	private String fd_code;
 	private String fd_name;
 	private Integer fd_year;
-	private String fd_ccode;
-	private String fd_tcode;
+	private String cp_name;
+	private String it_name;
 	private Integer fd_ones;
 	private Integer fd_all;
 	private Integer fd_kral;

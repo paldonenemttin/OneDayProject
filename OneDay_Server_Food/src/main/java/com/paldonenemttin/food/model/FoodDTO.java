@@ -26,6 +26,7 @@ public class FoodDTO {
 	private Integer fd_fat;
 	private Integer fd_carb;
 	private Integer fd_suga;
+	
 
 	
 }
